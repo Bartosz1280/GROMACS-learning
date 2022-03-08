@@ -1,0 +1,19 @@
+### Model preparation
+echo 
+echo ####################
+echo Model Preparation
+echo ####################
+echo
+echo
+echo !!!!!!!!!!!!!!!!!!!
+echo Protein topology
+echo !!!!!!!!!!!!!!!!!!!
+echo
+echo SAVE JZ4 CORDINATES
+echo
+grep JZ4 3HTB_clean.pdb > jz4.pdb
+echo
+echo Message: Protein cordinates saved
+echo
+echo Then simply delete the JZ4 lines from 3HTB_clean.pdb
+

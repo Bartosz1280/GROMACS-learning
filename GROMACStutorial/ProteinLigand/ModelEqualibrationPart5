@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --ntasks=4
+#SBATCH --cpus-per-task=56
+#SBATCH --time=03:00:00
+#SBATCH --mem=83gb    # 84000 MB = 84000/1024 GB = 82.1 GB
+#SBATCH --export=ALL,MPI_MODULE=mpi/openmpi/3.1,EXECUTABLE=./ompi_omp_program
+#SBATCH --output="parprog_hybrid_%j.out"  
+
+# Use when a defined module environment related to OpenMPI is wished
+module load chem/gromacs/2020.4 
+
+module load ${MPI_MODULE}
+export OMP_NUM_THREADS=$((${SLURM_CPUS_PER_TASK}/2))
+export MPIRUN_OPTIONS="--bind-to core --map-by socket:PE=${OMP_NUM_THREADS} -report-bindings"
+export NUM_CORES=${SLURM_NTASKS}*${OMP_NUM_THREADS}
+echo "${EXECUTABLE} running on ${NUM_CORES} cores with ${SLURM_NTASKS} MPI-tasks and ${OMP_NUM_>
+startexe="mpirun -n ${SLURM_NTASKS} ${MPIRUN_OPTIONS} ${EXECUTABLE}"
+echo $startexe
+exec $startexe
+gmx_mpi mdrun -deffnm npt

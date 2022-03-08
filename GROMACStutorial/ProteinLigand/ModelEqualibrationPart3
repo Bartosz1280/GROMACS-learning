@@ -1,0 +1,6 @@
+echo ##########################
+echo Model Equalibration Part 3
+echo ##########################
+echo
+echo running mdrun
+gmx_mpi mdrun -deffnm nvt

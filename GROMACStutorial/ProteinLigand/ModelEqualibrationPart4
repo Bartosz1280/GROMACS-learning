@@ -1,0 +1,12 @@
+echo ############################
+echo Model Equalibration Part 4
+echo ############################
+echo
+echo
+gmx_mpi grompp -f npt.mdp -c nvt.gro -t nvt.cpt -r nvt.gro -p topol.top -n index.ndx -o npt.tpr
+echo
+echo NPT prepared
+echo
+echo Next script contains mdrun
+echo
+

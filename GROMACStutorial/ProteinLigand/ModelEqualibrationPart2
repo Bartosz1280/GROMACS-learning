@@ -1,0 +1,11 @@
+echo ####################################
+echo Model Equalibration Part 2
+echo ####################################
+echo
+echo
+echo Further model equalibration
+echo
+gmx_mpi grompp -f nvt.mdp -c em.gro -r em.gro -p topol.top -n index.ndx -o nvt.tpr
+echo
+echo Temperature equalibrated
+echo Next file contains mdrun

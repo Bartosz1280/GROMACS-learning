@@ -1,0 +1,20 @@
+echo
+echo ########################
+echo MODEL PREPARATION PART 2
+echo ########################
+echo
+echo Unarchive the force field tarball
+tar -zxvf charmm36-mar2019.ff.tgz
+echo Message: unarchive completed
+echo
+echo 
+echo
+echo Write the lysozyme with pdb2gmx
+gmx_mpi pdb2gmx -f 3HTB_clean.pdb -o 3HTB_processed.gro
+echo
+echo Message:writing lysoze completed
+echo
+echo
+echo Add Hydrogen Atoms to JZ4
+echo visit: http://www.mdtutorials.com/gmx/complex/02_topology.html
+

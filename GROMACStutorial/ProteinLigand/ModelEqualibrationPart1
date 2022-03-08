@@ -1,0 +1,26 @@
+echo ###################
+echo MODEL EQUALIBRATION
+echo ###################
+echo
+echo Restraining the Ligand
+echo
+echo
+echo Creating restraint topology
+gmx_mpi make_ndx -f jz4.gro -o index_jz4.ndx
+echo
+echo Message:Restraint topology created
+echo
+echo Execusion of genrestr module
+gmx_mpi genrestr -f jz4.gro -n index_jz4.ndx -o posre_jz4.itp -fc 1000 1000 1000
+echo Message execution completed
+echo
+echo !!!!!! Now, we need to include this information in our topology.
+echo We can do this in several ways, depending upon the conditions we wish to use.
+echo If we simply want to restrain the ligand whenever the protein is also restrained, 
+echo  add the following lines to your topology in the location indicated
+echo
+echo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+echo Equalibrate the temperature of the system (See: Thermostats section)
+echo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+echo http://www.mdtutorials.com/gmx/complex/06_equil.html
+

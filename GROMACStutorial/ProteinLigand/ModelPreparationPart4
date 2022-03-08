@@ -1,0 +1,40 @@
+echo #######################
+echo Model Preparation 4
+echo #######################
+echo
+echo
+echo Defining unit cell
+gmx_mpi editconf -f complex.gro -o newbox.gro -bt dodecahedron -d 1.0
+echo
+echo Message: Cell defined as dodecahedron with 1.0 nm dimension
+echo
+echo Adding water
+gmx_mpi solvate -cp newbox.gro -cs spc216.gro -p topol.top -o solv.gro
+echo
+echo Water added to the model
+echo
+echo Adding ions to the model
+echo
+gmx_mpi grompp -f ions.mdp -c solv.gro -p topol.top -o ions.tpr
+echo Message: Ions added
+echo
+echo Passing .tpr to genion
+echo
+gmx_mpi genion -s ions.tpr -o solv_ions.gro -p topol.top -pname NA -nname CL -neutral
+echo Message: Genion complete
+echo
+echo 
+echo ENERGY MINIMIZATION
+echo
+echo Creating binary
+gmx_mpi grompp -f em.mdp -c solv_ions.gro -p topol.top -o em.tpr
+echo
+echo Message:Binary created
+echo
+echo !!!!!!!! Model is prepared !!!!!!!!!!
+echo Next script runs md_run
+echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+

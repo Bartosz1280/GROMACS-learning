@@ -1,0 +1,35 @@
+echo ##########################
+echo Preparing Model 3
+echo ##########################
+echo
+echo
+echo SORTING BONDS WITH sort_mol2_bonds_pl
+echo
+perl sort_mol2_bonds.pl jz4.mol2 jz4_fix.mol2
+echo
+echo Message completed
+echo
+echo GENERATING TOPOLOGY WITH CGenFF
+echo
+python cgenff_charmm2gmx.py JZ4 jz4_fix.mol2 jz4.str charmm36-mar2019.ff
+echo Message: Topology generated
+echo
+echo BUILDING THE COMPLEX
+echo
+echo
+gmx_mpi editconf -f jz4_ini.pdb -o jz4.gro
+echo
+echo Message: Complex generated
+echo
+echo Copying 3HTB_processed.gro  to complex.gro
+echo
+cp 3HTB_processed.gro  complex.gro
+echo Message: File copied
+echo
+echo Next, simply copy the coordinate section of jz4.gro and paste it into complex.gro,
+echo below the last line of the protein atoms, and before the box vectors, like so:
+echo
+echo
+echo After that Build the Topology
+echo http://www.mdtutorials.com/gmx/complex/02_topology.html
+
